@@ -1,3 +1,5 @@
+<app-login></app-login>
+
 <!-- navbar -->
 <nav class="navbar navbar-dark navbar-full bg-inverse">
   <!-- <button class="navbar-toggler" type="button" aria-label="Toggle navigation" (click)="_toggleSidebar()"></button> -->
@@ -11,6 +13,8 @@
     <span *ngIf="! auth.authenticated()"><a href="javascript:void(0)" class="btn btn-outline-success" (click)="auth.login()" >Login</a></span>
     <span *ngIf="! auth.authenticated()"><a href="javascript:void(0)" class="btn btn-outline-primary" routerLink="/profile" >Profile</a></span>
     <span  *ngIf="auth.authenticated()"><a href="javascript:void(0)" class="btn btn-outline-danger" (click)="auth.logout()">Logout</a></span> -->
+    <app-login-button></app-login-button>
+    <app-logout-button></app-logout-button>
   </div>
 </nav>
 <!-- /navbar -->

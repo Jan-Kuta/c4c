@@ -10,8 +10,9 @@ import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { LogoutComponent } from './components/logout/logout.component';
-
+import { LoginButtonComponent } from './components/login-button/login-button.component';
+import { LogoutButtonComponent } from './components/logout-button/logout-button.component';
+import { RegisterButtonComponent } from './components/register-button/register-button.component';
 
 const routes: Routes = [
   { path: 'profile', component: ProfileComponent},
@@ -26,7 +27,9 @@ const routes: Routes = [
     ProfileComponent,
     LoginComponent,
     RegisterComponent,
-    LogoutComponent
+    LoginButtonComponent,
+    LogoutButtonComponent,
+    RegisterButtonComponent
   ],
   imports: [
     BrowserModule,
