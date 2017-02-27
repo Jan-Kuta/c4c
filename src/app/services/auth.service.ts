@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Parse } from 'parse';
 import { Observable, ReplaySubject } from 'rxjs';
 import { AuthResponse } from '../types/AuthResponse';
 
-//declare var Parse: any;
+const Parse: any = require('parse');
 
 @Injectable()
 export class AuthService {
@@ -15,7 +14,18 @@ export class AuthService {
     }
 
     login() {
-        this.subject.next({token: "token", username: "jan.kuta@email.cz", nickname: "Kutik" });
+        const self = this;
+        Parse.User.logIn('jan.kuta@email.cz', 'password').then(
+            function success(user) {
+                console.log("Logged in ", user);
+                self.subject.next({token: "token", username: "jan.kuta@email.cz", nickname: "Kutik" });
+            }, 
+            function error(err) {
+                console.error("Error: " + err.code + " " + err.message);
+                self.subject.next(null);
+            }
+        );
+
     }
 
     logout(){
