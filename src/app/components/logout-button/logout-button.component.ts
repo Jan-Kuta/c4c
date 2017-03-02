@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -7,9 +7,9 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LogoutButtonComponent implements OnInit {
 
-    private visible: boolean = true;
+    private visible: boolean;
 
-    constructor(private authService: AuthService) { }
+    constructor(private authService: AuthService, private changeDetectorRef: ChangeDetectorRef) { }
 
     ngOnInit() {
         console.log("Logout button init");
@@ -20,6 +20,11 @@ export class LogoutButtonComponent implements OnInit {
             else{
                 this.visible = false;
             }
+            this.changeDetectorRef.detectChanges();
         });
+    }
+
+    logout() {
+        this.authService.logout();
     }
 }

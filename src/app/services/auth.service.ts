@@ -14,25 +14,31 @@ export class AuthService {
     }
 
     login() {
-        const self = this;
         Parse.User.logIn('jan.kuta@email.cz', 'password').then(
-            function success(user) {
+            (user) => {
                 console.log("Logged in ", user);
-                self.subject.next({token: "token", username: "jan.kuta@email.cz", nickname: "Kutik" });
-            }, 
-            function error(err) {
+                this.subject.next({token: "token", username: "jan.kuta@email.cz", nickname: "Kutik" });
+            },
+            (err) => {
                 console.error("Error: " + err.code + " " + err.message);
-                self.subject.next(null);
+                this.subject.next(null);
             }
         );
-
     }
 
-    logout(){
-        this.subject.next(null);
+    logout() {
+        Parse.User.logOut().then((user) => {
+            console.log("Loggout: ", user);
+            this.subject.next(null);
+        },
+        (err) => {
+                console.error("Error: " + err.code + " " + err.message);
+                this.subject.next(null);
+            }
+        );
     }
 
-    init(){
+    init() {
         this.subject.next(null);
     }
 

@@ -9,6 +9,9 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+    loggedIn: boolean;
+    loginDialogOpened: boolean;
+
     constructor(private authService: AuthService){
 
     }
@@ -16,5 +19,7 @@ export class AppComponent {
     ngOnInit() {
         console.log("appComponent init");
         this.authService.init();
+        this.loggedIn = false;
+        this.loginDialogOpened = false;
     }
 }
