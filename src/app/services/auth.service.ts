@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
-import { AuthResponse } from '../types/AuthResponse';
+import { CurrentUser } from '../shared/CurrentUser';
 
 const Parse: any = require('parse');
 
 @Injectable()
 export class AuthService {
-    private subject = new ReplaySubject<AuthResponse>();
+    private subject = new ReplaySubject<CurrentUser>();
 
     constructor(){
         Parse.initialize("3fa85ab2-ad63-482d-9071-0c8865867704");
@@ -16,9 +16,8 @@ export class AuthService {
     login() {
         Parse.User.logIn('jan.kuta@email.cz', 'password').then(
             (user) => {
-                console.log("Logged in ", user);
-                this.subject.next({token: "token", username: "jan.kuta@email.cz", nickname: "Kutik" });
-            },
+                this.subject.next(this.parseUser2CurrentUser(user));
+            }, 
             (err) => {
                 console.error("Error: " + err.code + " " + err.message);
                 this.subject.next(null);
@@ -39,11 +38,32 @@ export class AuthService {
     }
 
     init() {
-        this.subject.next(null);
+        this.subject.next(this.getCurrentUser());
     }
 
-    getAuthObsevable(): Observable<AuthResponse>{
+    getAuthObsevable(): Observable<CurrentUser>{
         return this.subject.asObservable();
+    }
+
+    isAuthenticated() {
+        const currentUser = Parse.User.current();
+        if (currentUser) {
+            return true;
+        }
+        return false;
+    }
+
+    getCurrentUser() {
+        const parseUser = Parse.User.current();
+        return this.parseUser2CurrentUser(parseUser);
+    }
+
+    private parseUser2CurrentUser(parseUser: any){
+        if (parseUser) {
+            return { email: parseUser.get("email"), username: parseUser.get("username"), nickname: parseUser.get("nickname"), avatar: parseUser.get("avatar")._url};
+        } else {
+            return null;
+        }
     }
 
 }

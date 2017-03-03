@@ -13,7 +13,7 @@
     <span *ngIf="! auth.authenticated()"><a href="javascript:void(0)" class="btn btn-outline-success" (click)="auth.login()" >Login</a></span>
     <span *ngIf="! auth.authenticated()"><a href="javascript:void(0)" class="btn btn-outline-primary" routerLink="/profile" >Profile</a></span>
     <span  *ngIf="auth.authenticated()"><a href="javascript:void(0)" class="btn btn-outline-danger" (click)="auth.logout()">Logout</a></span> -->
-    <app-login-button (loginDialogOpen) = "loginDialogOpened = true"></app-login-button>
+    <app-login-button></app-login-button>
     <app-logout-button></app-logout-button>
   </div>
 </nav>

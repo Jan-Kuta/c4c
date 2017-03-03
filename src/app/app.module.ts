@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { RouterModule, Routes } from '@angular/router'
+import { routing } from './app.routing'
 
 import { AppComponent } from './app.component';
 import { AlertComponent } from './components/alert/alert.component';
@@ -14,10 +14,8 @@ import { LoginButtonComponent } from './components/login-button/login-button.com
 import { LogoutButtonComponent } from './components/logout-button/logout-button.component';
 import { RegisterButtonComponent } from './components/register-button/register-button.component';
 
-const routes: Routes = [
-  { path: 'profile', component: ProfileComponent},
-  { path: '', component: HomeComponent }
-];
+import { AlertService } from './services/alert.service';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -35,9 +33,9 @@ const routes: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(routes)
+    routing
   ],
-  providers: [],
+  providers: [ AlertService, AuthService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
