@@ -1,13 +1,13 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { LoginComponent } from './../login-dialog/login.component';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs/Rx';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-login-button',
   templateUrl: './login-button.component.html'
 })
 export class LoginButtonComponent implements OnInit, OnDestroy {
-
     private visible: boolean;
     private subscription: Subscription;
 
@@ -24,7 +24,7 @@ export class LoginButtonComponent implements OnInit, OnDestroy {
         });
     }
 
-    ngOnDestroy(){
+    ngOnDestroy() {
         this.subscription.unsubscribe();
     }
 }

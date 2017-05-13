@@ -1,0 +1,46 @@
+<app-login></app-login>
+
+<nav class="navbar navbar-dark navbar-full bg-inverse">
+  <!-- <button class="navbar-toggler" type="button" aria-label="Toggle navigation" (click)="_toggleSidebar()"></button> -->
+  <!-- <ul class="nav navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/">Home</a>
+    </li>
+  </ul> -->
+  
+  <!--<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar-left" aria-controls="navbar-left" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>-->
+  <!--<a class="navbar-brand" href="/">C4C</a>-->
+
+  <ul class="navbar-nav" id="navbar-left">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/guide" [routerLinkActive]="['active']">Guides</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/article" [routerLinkActive]="['active']">Articles</a>
+    </li>
+  </ul>
+  <div class="float-xs-right">
+    <app-pofile-button></app-pofile-button>
+    <app-login-button></app-login-button>
+    <app-logout-button></app-logout-button>
+  </div>
+</nav>
+<!-- /navbar -->
+
+<!-- sidebar -->
+<!-- <ng-sidebar-container>
+<ng-sidebar class="sidebar-nav ng-sidebar--push" [(opened)]="_open" sidebarClass="c4c-sidebar">
+  <ul class="nav nav-sidebar ng-sidebar__content">
+    <li><a href="javascript:void(0)">Overview</a></li>
+    <li><a href="javascript:void(0)">Reports</a></li>
+    <li><a href="javascript:void(0)">Analytics</a></li>
+    <li class="active"><a href="javascript:void(0)">Export</a></li>
+  </ul>
+</ng-sidebar>
+</ng-sidebar-container> -->
+<!-- /sidebar -->

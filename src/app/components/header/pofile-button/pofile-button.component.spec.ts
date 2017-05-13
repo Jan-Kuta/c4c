@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RegisterButtonComponent } from './register-button.component';
+import { PofileButtonComponent } from './pofile-button.component';
 
-describe('RegisterButtonComponent', () => {
-  let component: RegisterButtonComponent;
-  let fixture: ComponentFixture<RegisterButtonComponent>;
+describe('PofileButtonComponent', () => {
+  let component: PofileButtonComponent;
+  let fixture: ComponentFixture<PofileButtonComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RegisterButtonComponent ]
+      declarations: [ PofileButtonComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RegisterButtonComponent);
+    fixture = TestBed.createComponent(PofileButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

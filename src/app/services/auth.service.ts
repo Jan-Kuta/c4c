@@ -1,5 +1,6 @@
+import { AlertService } from './alert.service';
 import { Injectable } from '@angular/core';
-import { Observable, ReplaySubject } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs/Rx';
 import { CurrentUser } from '../shared/CurrentUser';
 
 const Parse: any = require('parse');
@@ -8,18 +9,24 @@ const Parse: any = require('parse');
 export class AuthService {
     private subject = new ReplaySubject<CurrentUser>();
 
-    constructor(){
-        Parse.initialize("3fa85ab2-ad63-482d-9071-0c8865867704");
+    constructor(private alertService: AlertService) {
+        Parse.initialize('3fa85ab2-ad63-482d-9071-0c8865867704');
         Parse.serverURL = 'https://climbers4climbers.herokuapp.com/parse';
     }
 
-    login() {
-        Parse.User.logIn('jan.kuta@email.cz', 'password').then(
+    loginFacebook() {
+        console.log('TBD');
+    }
+
+    login(email: string, password: string) {
+        Parse.User.logIn(email, password).then(
             (user) => {
+                this.alertService.success('You are logged in successfully.');
                 this.subject.next(this.parseUser2CurrentUser(user));
-            }, 
+            },
             (err) => {
-                console.error("Error: " + err.code + " " + err.message);
+                console.error('Error: ' + err.code + ' ' + err.message);
+                this.alertService.error(err.message);
                 this.subject.next(null);
             }
         );
@@ -27,11 +34,10 @@ export class AuthService {
 
     logout() {
         Parse.User.logOut().then((user) => {
-            console.log("Loggout: ", user);
             this.subject.next(null);
         },
         (err) => {
-                console.error("Error: " + err.code + " " + err.message);
+                console.error('Error: ' + err.code + ' ' + err.message);
                 this.subject.next(null);
             }
         );
@@ -41,7 +47,7 @@ export class AuthService {
         this.subject.next(this.getCurrentUser());
     }
 
-    getAuthObsevable(): Observable<CurrentUser>{
+    getAuthObsevable(): Observable<CurrentUser> {
         return this.subject.asObservable();
     }
 
@@ -58,9 +64,14 @@ export class AuthService {
         return this.parseUser2CurrentUser(parseUser);
     }
 
-    private parseUser2CurrentUser(parseUser: any){
+    private parseUser2CurrentUser(parseUser: any) {
         if (parseUser) {
-            return { email: parseUser.get("email"), username: parseUser.get("username"), nickname: parseUser.get("nickname"), avatar: parseUser.get("avatar")._url};
+            return {
+                email: parseUser.get('email'),
+                username: parseUser.get('username'),
+                nickname: parseUser.get('nickname'),
+                avatar: parseUser.get('avatar')._url
+            };
         } else {
             return null;
         }
