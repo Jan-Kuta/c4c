@@ -45,6 +45,14 @@ export class LoginComponent implements OnInit {
       this.authService.loginFacebook();
   }
 
+  twitterLogin() {
+      this.authService.loginTwitter();
+  }
+
+  googleLogin() {
+      this.authService.loginGoogle();
+  }
+
   login() {
       this.authService.login(this.myForm.controls['email'].value, this.myForm.controls['password'].value);
       this.hide();
